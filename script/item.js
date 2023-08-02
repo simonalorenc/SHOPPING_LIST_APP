@@ -23,9 +23,7 @@ export function renderItem(newItem) {
 
     renderDeleteElement(oneItemOptions)
 
-    const oneItemEdit = document.createElement('div')
-    oneItemEdit.classList.add('one-item-options__edit')
-    oneItemEdit.innerHTML = 'Edit'
+    renderEditElement(oneItemOptions)
 
     const oneItemCheckbox = document.createElement('input')
     oneItemCheckbox.type = 'checkbox'
@@ -37,10 +35,7 @@ export function renderItem(newItem) {
     oneItemContainer.appendChild(oneItemDiv)
     oneItemContainer.appendChild(oneItemOptions)
 
-    oneItemOptions.appendChild(oneItemEdit)
     oneItemOptions.appendChild(oneItemCheckbox)
-
-    oneItemEdit.addEventListener('click', editItemName)
 
     textInput.value = ''
     oneItemContainer.setAttribute('data-id', i)
@@ -61,6 +56,39 @@ export function deleteAllItems() {
 
 export function editItemName() {
     console.log('edit')
+}
+
+function renderEditElement(parent) {
+    const oneItemEdit = document.createElement('div')
+    oneItemEdit.classList.add('one-item-options__edit')
+    oneItemEdit.innerHTML = 'Edit'
+    parent.appendChild(oneItemEdit)
+    oneItemEdit.addEventListener('click', () => {
+        console.log(parent.parentNode.children[0])
+        const itemToEdit = parent.parentNode.children[0]
+        const editInput = document.createElement('input')
+        editInput.type = 'text'
+        editInput.classList.add('all-items__text-input')
+        editInput.value = itemToEdit.innerHTML
+        parent.parentNode.removeChild(itemToEdit)
+        parent.parentNode.insertBefore(editInput, parent)
+            
+        editInput.addEventListener('keydown', () => {
+            if (event.key === 'Enter') {
+                let newItemsArray = itemsArray.map(item => item.item)
+                const indexToChange = newItemsArray.indexOf(itemToEdit.innerHTML)
+                console.log(itemsArray)
+
+                parent.parentNode.removeChild(editInput)
+                parent.parentNode.insertBefore(itemToEdit, parent)
+                itemToEdit.innerHTML = editInput.value
+                itemsArray[indexToChange].item = itemToEdit.innerHTML
+                console.log(itemsArray)
+
+                localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+            }
+        })
+    })
 }
 
 function renderDeleteElement(parent) {
