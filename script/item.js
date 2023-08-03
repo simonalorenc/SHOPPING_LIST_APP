@@ -1,4 +1,4 @@
-import {addBtn, allItems, deleteBtn, textInput, itemsContainer, itemsArray} from "./main.js";
+import {addBtn, allItems, deleteBtn, textInput, itemsContainer, itemsArray, deleteBoughtItemsBtn} from "./main.js";
 
 let i = 0
 
@@ -25,17 +25,13 @@ export function renderItem(newItem) {
 
     renderEditElement(oneItemOptions)
 
-    const oneItemCheckbox = document.createElement('input')
-    oneItemCheckbox.type = 'checkbox'
-    oneItemCheckbox.classList.add('one-item-options__checkbox')
+    renderCheckboxElement(oneItemOptions, newItem)
 
     oneItemDiv.innerHTML = newItem.item
 
     itemsContainer.appendChild(oneItemContainer)
     oneItemContainer.appendChild(oneItemDiv)
     oneItemContainer.appendChild(oneItemOptions)
-
-    oneItemOptions.appendChild(oneItemCheckbox)
 
     textInput.value = ''
     oneItemContainer.setAttribute('data-id', i)
@@ -77,13 +73,11 @@ function renderEditElement(parent) {
             if (event.key === 'Enter') {
                 let newItemsArray = itemsArray.map(item => item.item)
                 const indexToChange = newItemsArray.indexOf(itemToEdit.innerHTML)
-                console.log(itemsArray)
 
                 parent.parentNode.removeChild(editInput)
                 parent.parentNode.insertBefore(itemToEdit, parent)
                 itemToEdit.innerHTML = editInput.value
                 itemsArray[indexToChange].item = itemToEdit.innerHTML
-                console.log(itemsArray)
 
                 localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
             }
@@ -103,5 +97,36 @@ function renderDeleteElement(parent) {
         itemsContainer.removeChild(parent.parentNode)
         itemsArray.splice(indexToRemove, 1)
         localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+    })
+}
+
+function renderCheckboxElement(parent, item) {
+    const oneItemCheckbox = document.createElement('input')
+    oneItemCheckbox.type = 'checkbox'
+    oneItemCheckbox.classList.add('one-item-options__checkbox')
+    oneItemCheckbox.checked = item.isBought
+    parent.appendChild(oneItemCheckbox)
+    oneItemCheckbox.addEventListener('click', () => {
+        const indexOfCheckbox = parent.parentNode.getAttribute('data-id')
+        if (oneItemCheckbox.checked) {
+            itemsArray[indexOfCheckbox].isBought = true
+            localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+        } else {
+            itemsArray[indexOfCheckbox].isBought = false
+            localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+        }
+    })
+}
+
+export function deleteBoughtItems() {
+    deleteBoughtItemsBtn.addEventListener('click', () => {
+        for (let i = itemsArray.length - 1; i >= 0; i--) {
+            if (itemsArray[i].isBought === true) {
+                const itemToDelete = itemsArray.indexOf(itemsArray[i])
+                itemsContainer.removeChild(itemsContainer.children[itemToDelete])
+                itemsArray.splice(itemToDelete, 1)
+                localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+            }
+        }
     })
 }

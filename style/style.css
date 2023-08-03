@@ -49,7 +49,7 @@ body {
 
 .all-items .all-items__buttons {
   display: flex;
-  width: 140px;
+  width: 215px;
   justify-content: space-between;
   align-items: end;
 }
@@ -75,6 +75,20 @@ body {
   height: 60px;
   border-radius: 50%;
   background-color: #c5bbbb;
+  color: white;
+  font-size: 25px;
+  border: none;
+  font-weight: 600;
+}
+
+.all-items .all-items__bought-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #2970da;
   color: white;
   font-size: 25px;
   border: none;

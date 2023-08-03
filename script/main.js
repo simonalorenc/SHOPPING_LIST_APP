@@ -1,8 +1,9 @@
-import {createItem, renderItem, addItem, deleteAllItems} from "./item.js";
+import {createItem, renderItem, addItem, deleteAllItems, deleteBoughtItems} from "./item.js";
 
 export const allItems = document.querySelector('.all-items')
 export const addBtn = document.querySelector('.all-items__add-item')
 export const deleteBtn = document.querySelector('.all-items__delete')
+export const deleteBoughtItemsBtn = document.querySelector('.all-items__bought-delete')
 export const textInput = document.querySelector('.all-items__text-input')
 export const itemsContainer = document.querySelector('.items-container')
 
@@ -20,6 +21,7 @@ async function main() {
 
     addItem(textInput)
     renderSavedItems()
+    deleteBoughtItems()
     deleteBtn.addEventListener('click', deleteAllItems)
 }
 

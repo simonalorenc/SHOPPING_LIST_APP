@@ -48,7 +48,7 @@ body{
 
     & &__buttons{
         display: flex;
-        width: 140px;
+        width: 215px;
         justify-content: space-between;
         align-items: end;
     }
@@ -78,6 +78,20 @@ body{
         font-size: 25px;
         border: none;
         font-weight: 600;
+    }
+
+    & &__bought-delete{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgb(41, 112, 218);
+            color: white;
+            font-size: 25px;
+            border: none;
+            font-weight: 600;
     }
 }
 
