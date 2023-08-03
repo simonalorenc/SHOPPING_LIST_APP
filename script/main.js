@@ -1,4 +1,5 @@
-import {createItem, renderItem, addItem, deleteAllItems, deleteBoughtItems} from "./item.js";
+import {renderItem} from "./item.js";
+import {setupAddBtnClickListener, setupDeleteAllItemsListener, setupDeleteBoughtItemsListener} from "./options.js";
 
 export const allItems = document.querySelector('.all-items')
 export const addBtn = document.querySelector('.all-items__add-item')
@@ -19,16 +20,24 @@ async function main() {
         itemsArray = JSON.parse(currentItems)
     }
 
-    addItem(textInput)
     renderSavedItems()
-    deleteBoughtItems()
-    deleteBtn.addEventListener('click', deleteAllItems)
+    setupAddBtnClickListener()
+    setupDeleteAllItemsListener()
+    setupDeleteBoughtItemsListener()
 }
 
 function renderSavedItems() {
     itemsArray.forEach(savedItem => {
         renderItem(savedItem)
     })
+}
+
+export function updateLocalStorage() {
+    localStorage.setItem('shoppingItems', JSON.stringify(itemsArray))
+}
+
+export function clearLocalStorage() {
+    localStorage.removeItem('shoppingItems')        
 }
 
 main()
