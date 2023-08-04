@@ -95,36 +95,36 @@ body {
   font-weight: 600;
 }
 
-.one-item-container {
+.item-container {
   display: flex;
   justify-content: space-between;
 }
 
-.one-item {
+.item-container .item-container__item-name {
   font-size: 30px;
   padding: 15px;
 }
 
-.one-item-options {
+.item-container .item-container__item-options {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
 }
 
-.one-item-options .one-item-options__delete {
+.item-container .item-container__delete {
   font-weight: 900;
   font-size: 25px;
   color: #d54d4d;
 }
 
-.one-item-options .one-item-options__edit {
+.item-container .item-container__edit {
   font-weight: 600;
   font-size: 20px;
   color: #c5bbbb;
 }
 
-.one-item-options .one-item-options__checkbox {
+.item-container .item-container__checkbox {
   width: 22px;
   height: 22px;
   margin-right: 30px;

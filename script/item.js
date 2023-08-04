@@ -10,14 +10,13 @@ export function createItem(id, item, isBought = false) {
 
 export function renderItem(item) {
     const oneItemContainer = document.createElement('div')
-    oneItemContainer.classList.add('one-item-container')  // maybe item-cointainer is enought?
+    oneItemContainer.classList.add('item-container') 
 
     const oneItemDiv = document.createElement('div')
-    oneItemDiv.classList.add('one-item') // iitem-cointainer__item-name
+    oneItemDiv.classList.add('item-container__item-name') 
 
     const oneItemOptions = document.createElement('div')
-    oneItemOptions.classList.add('one-item-options') // item-cointainer__item-options
-
+    oneItemOptions.classList.add('item-container__item-options') 
     renderDeleteElement(oneItemOptions)
 
     renderEditElement(item, oneItemOptions, oneItemDiv, oneItemContainer)
@@ -35,7 +34,7 @@ export function renderItem(item) {
 
 function renderDeleteElement(parent) {
     const deleteDiv = document.createElement('div')
-    deleteDiv.classList.add('one-item-options__delete')
+    deleteDiv.classList.add('item-container__delete')
     deleteDiv.innerHTML = 'X' //TODO add some image
     parent.appendChild(deleteDiv)
     deleteDiv.addEventListener('click', () => {
@@ -50,7 +49,7 @@ function renderDeleteElement(parent) {
 
 function renderEditElement(item, parent, oneItemDiv, oneItemContainer) {
     const editDiv = document.createElement('div')
-    editDiv.classList.add('one-item-options__edit')
+    editDiv.classList.add('item-container__edit')
     editDiv.innerHTML = 'Edit'
     parent.appendChild(editDiv)
     editDiv.addEventListener('click', () => {
@@ -77,7 +76,7 @@ function renderEditElement(item, parent, oneItemDiv, oneItemContainer) {
 function renderCheckboxElement(parent, item) {
     const checkboxInput = document.createElement('input')
     checkboxInput.type = 'checkbox'
-    checkboxInput.classList.add('one-item-options__checkbox')
+    checkboxInput.classList.add('item-container__checkbox')
     checkboxInput.checked = item.isBought
     parent.appendChild(checkboxInput)
     checkboxInput.addEventListener('click', () => {

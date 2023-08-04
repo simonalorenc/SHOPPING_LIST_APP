@@ -95,21 +95,21 @@ body{
     }
 }
 
-.one-item-container{
+.item-container{
     display: flex;
     justify-content: space-between;
-}
 
-.one-item{
-    font-size: 30px;
-    padding: 15px;
-}
+    & &__item-name{
+        font-size: 30px;
+        padding: 15px;
+    }
 
-.one-item-options{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    & &__item-options{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
 
     & &__delete{
         font-weight: 900;
